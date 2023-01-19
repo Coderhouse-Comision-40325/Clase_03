@@ -30,3 +30,22 @@ const funcionCallback = (valor) => { // evaluar si un numero es par
 
 const evaluacionPares = valoresOriginales.map(funcionCallback);
 console.log(evaluacionPares);
+
+/*
+EXTRA:
+
+Queremos que una función se ejecute sobre el mismo array y no tener que pasarlo como parametro, para eso debemos agregar nuestra nueva funcion en el prototipo del objeto array
+
+*/
+
+Array.prototype.miPropiaFuncionMap = function(callback){
+    let nuevoArray = [];
+    for(let i = 0; i < this.length; i++) {
+        let nuevoValor = callback(this[i])
+        nuevoArray.push(nuevoValor)
+    }
+    return nuevoArray;
+}
+let arrayPrueba = [1, 2, 3, 4, 5];
+let newValues = arrayPrueba.miPropiaFuncionMap(x=>x+1)
+console.log(newValues)
